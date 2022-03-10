@@ -3,20 +3,20 @@ import { logger } from "../utils/Logger"
 import { api } from "./AxiosService"
 
 
-class CarsService{
-  async getAll(){
+class CarsService {
+  async getAll() {
     const res = await api.get('api/cars')
     logger.log('[get all cars]', res.data)
     AppState.cars = res.data
   }
 
-  async getById(id){
+  async getById(id) {
     const res = await api.get('api/cars/' + id)
     logger.log('[get car by id]', res.data)
     AppState.activeCar = res.data
   }
 
-  async create(carData){
+  async create(carData) {
     const res = await api.post('api/cars', carData)
     logger.log('[create car]', res.data)
     AppState.cars.push(res.data)
@@ -24,8 +24,9 @@ class CarsService{
     return res.data
   }
 
-  async update(carData){
-    const res = await api.put('api/cars/'+ carData.id, carData)
+  async update(carData) {
+    logger.log(carData.id, 'this is what car data shouldnlook like')
+    const res = await api.put('api/cars/' + carData.id, carData)
     logger.log('[update car]', res.data)
     AppState.activeCar = res.data
   }

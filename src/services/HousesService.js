@@ -12,6 +12,7 @@ class HousesService {
     const res = await api.post("api/houses", houseData);
     logger.log(res.data);
     AppState.houses.push(res.data);
+    return res.data
   }
   async getById(id) {
     const res = await api.get('api/houses/' + id)
@@ -19,6 +20,7 @@ class HousesService {
     AppState.activeHouse = res.data
   }
   async editHouse(houseData) {
+    logger.log(houseData.id)
     const res = await api.put('api/houses/' + houseData.id, houseData)
     AppState.activeHouse = res.data
 

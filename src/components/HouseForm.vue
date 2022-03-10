@@ -113,6 +113,7 @@ export default {
     houseData: {
       type: Object,
       required: false,
+      default: {},
     },
   },
   setup(props) {
@@ -130,7 +131,7 @@ export default {
           Modal.getOrCreateInstance(
             document.getElementById("form-modal")
           ).hide();
-          router.push({ name: "HousesDetails", params: { id: newHouse.id } });
+          router.push({ name: "HouseDetails", params: { id: newHouse.id } });
         } catch (error) {
           logger.error(error);
         }
@@ -138,6 +139,7 @@ export default {
       async editHouse() {
         try {
           await housesService.editHouse(editable.value);
+          logger.log(editable.value);
           Modal.getOrCreateInstance(
             document.getElementById("form-modal")
           ).hide();

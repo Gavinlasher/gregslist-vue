@@ -18,7 +18,7 @@
     <template #modal-title
       >Edit {{ house.price }} {{ house.bedrooms }}</template
     >
-    <template #modal-body><HouseForm :HouseData="house" /></template>
+    <template #modal-body><HouseForm :houseData="house" /></template>
   </Modal>
 </template>
 
@@ -35,10 +35,12 @@ export default {
     const route = useRoute();
     onMounted(async () => {
       try {
-        AppState.activeCar;
+        AppState.activeCar = {};
         logger.log(route.params.id);
         await housesService.getById(route.params.id);
-      } catch (error) {}
+      } catch (error) {
+        logger.error(error);
+      }
     });
     return {
       house: computed(() => AppState.activeHouse),
